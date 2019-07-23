@@ -4,6 +4,11 @@ import multiprocessing as mp
 import platform
 import time
 
+
+'''
+IMPORTANT: This program must be run from the command line.
+'''
+
 class Tree():
     def __init__(self, root=None):
         self.root = root
@@ -87,15 +92,16 @@ if __name__ == '__main__':
     pool = mp.Pool(mp.cpu_count())
 
     #print_sysinfo()
-    print("\nNumber of processors: ", mp.cpu_count())
-    print("Number of iterations per tree: " + str(iterations))
+    print("\nNumber of processors          :", mp.cpu_count())
+    print("Number of iterations per tree : " + str(iterations))
+    print("Terminate program at exponent : " +str(maximum))
 
     while exp <= maximum:
 
         nodes = math.pow(2, exp)
         log2Nodes = math.log(nodes, 2)
         print("\n**********")
-        print("Exponent = " + str(exp))
+        print("Exponent                                    : " + str(exp))
         
         '''
         #no parallel
@@ -111,10 +117,10 @@ if __name__ == '__main__':
         end = time.time()
         averageHeight = sum(results) / len(results)
         
-        print("Nodes in Binary Tree: " + str((int)(nodes)))
-        print("Average Tree Height: " + str(averageHeight))
-        print("Depth ratio of average height / log2(nodes): " + str(averageHeight / log2Nodes))
-        print("Elapsed time: " + str(end - start) + "\n")
+        print("Nodes in Binary Tree                        : " + str((int)(nodes)))
+        print("Average Tree Height                         : " + '%.3f'%(averageHeight))
+        print("Depth ratio of average height / log2(nodes) : " + '%.3f'%(averageHeight / log2Nodes))
+        print("Elapsed time                                : " + '%.3f'%(end - start) + "\n")
 
         exp +=1
         
