@@ -1,7 +1,7 @@
 import random
 import math
 import multiprocessing as mp
-from multiprocessing import Pool
+import platform
 import time
 
 class Tree():
@@ -65,18 +65,34 @@ def tree_average(n):
             
         return(h)
 
+def print_sysinfo():
+
+    print('\nPython version  :', platform.python_version())
+    print('compiler        :', platform.python_compiler())
+
+    print('\nsystem     :', platform.system())
+    print('release    :', platform.release())
+    print('machine    :', platform.machine())
+    print('processor  :', platform.processor())
+    print('CPU count  :', mp.cpu_count())
+    print('interpreter:', platform.architecture()[0])
+    
+
+
 if __name__ == '__main__':
 
-    exp = 0
-    nodes = math.pow(2, exp)
+    exp = 1
     iterations = 100
     maximum = 20 #set the maximum exponent
     pool = mp.Pool(mp.cpu_count())
+
+    #print_sysinfo()
     print("\nNumber of processors: ", mp.cpu_count())
     print("Number of iterations per tree: " + str(iterations))
 
     while exp <= maximum:
 
+        nodes = math.pow(2, exp)
         log2Nodes = math.log(nodes, 2)
         print("\n**********")
         print("Exponent = " + str(exp))
@@ -97,12 +113,10 @@ if __name__ == '__main__':
         
         print("Nodes in Binary Tree: " + str((int)(nodes)))
         print("Average Tree Height: " + str(averageHeight))
-        if log2Nodes != 0:
-            print("Depth ratio of average height / log2(nodes): " + str(averageHeight / log2Nodes))
+        print("Depth ratio of average height / log2(nodes): " + str(averageHeight / log2Nodes))
         print("Elapsed time: " + str(end - start) + "\n")
 
         exp +=1
-        nodes = math.pow(2, exp)
         
     pool.close()
 
